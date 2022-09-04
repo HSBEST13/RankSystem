@@ -1,0 +1,8 @@
+name: MineIceRank
+version: '${project.version}'
+main: xyz.hsbestudio.mineice.MineIceRank
+api-version: 1.19
+authors: [ SilentType ]
+commands:
+  rank: {}
+  discord: {}

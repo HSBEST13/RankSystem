@@ -1,0 +1,10 @@
+tableName: "players"
+chatActivityRatio: 0.5
+gameActivityRatio: 0.5
+
+db:
+  host: "localhost"
+  port: "3306"
+  dbName: "mine-ice"
+  login: "root"
+  password: "pswd"
