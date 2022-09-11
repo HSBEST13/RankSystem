@@ -41,6 +41,7 @@ public class Database extends Config {
     }
 
     public void createTable(String _tableName) {
+
         tableName = _tableName;
         String request = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
                 " id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL nickname VARCHAR(30) NOT NULL , ds_nickname VARCHAR(30), chat_activity INTEGER, game_activity DOUBLE)";
