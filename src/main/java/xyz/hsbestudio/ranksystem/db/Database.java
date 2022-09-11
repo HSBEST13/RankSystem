@@ -1,7 +1,7 @@
-package xyz.hsbestudio.mineice.db;
+package xyz.hsbestudio.ranksystem.db;
 
 
-import xyz.hsbestudio.mineice.MineIceRank;
+import xyz.hsbestudio.ranksystem.RankSystem;
 
 import java.sql.*;
 import java.util.Objects;
@@ -9,12 +9,30 @@ import java.util.logging.Logger;
 
 public class Database extends Config {
 
-    private static final Logger LOGGER = Logger.getLogger(MineIceRank.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(RankSystem.class.getName());
+
+    private String tableName;
     Connection connection;
+
+//    public Database() {
+//        boolean isNaveDb = RankSystem.getInstance().getConfig().getBoolean("hasDb");
+//
+//        if (!isNaveDb) {
+//            String request = "CREATE DATABASE IF NOT EXISTS ?";
+//            String connectionData = "jdbc:mysql://" + HOST + ":" + PORT;
+//            try {
+//                Connection fConnection = DriverManager.getConnection(connectionData, LOGIN, PASSWORD);
+//                PreparedStatement preparedStatement = fConnection.prepareStatement(request);
+//                preparedStatement.setString(1, DATABASE_NAME);
+//                preparedStatement.executeUpdate();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e);
+//            }
+//        }
+//    }
 
     public Connection getConnection() throws SQLException, ClassNotFoundException {
         String connectionData = "jdbc:mysql://" + HOST + ":" + PORT + "/" + DATABASE_NAME;
-
         Class.forName("com.mysql.jdbc.Driver");
 
         connection = DriverManager.getConnection(connectionData, LOGIN, PASSWORD);
@@ -22,9 +40,10 @@ public class Database extends Config {
         return connection;
     }
 
-    public void createTable(String tableName) {
-        String request = "CREATE TABLE " + tableName + " (" +
-                "nickname VARCHAR(30) PRIMARY KEY NOT NULL, ds_nickname VARCHAR(30), chat_activity INTEGER, game_activity DOUBLE)";
+    public void createTable(String _tableName) {
+        tableName = _tableName;
+        String request = "CREATE TABLE IF NOT EXISTS " + tableName + " (" +
+                " id INTEGER AUTO_INCREMENT PRIMARY KEY NOT NULL nickname VARCHAR(30) NOT NULL , ds_nickname VARCHAR(30), chat_activity INTEGER, game_activity DOUBLE)";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);
@@ -34,8 +53,23 @@ public class Database extends Config {
         }
     }
 
+    public int getId(String nickname) {
+        ResultSet resultSet;
+        String request = "SELECT id FROM " + tableName + " WHERE nickname = ?";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(request);
+            preparedStatement.setString(1, nickname);
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet.getInt("id");
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void createPlayer(String nickname) {
-        String request = "INSERT INTO players (nickname, chat_activity, game_activity) VALUES (?, 0, 0)";
+        String request = "INSERT INTO " + tableName + " (nickname, chat_activity, game_activity) VALUES (?, 0, 0)";
 
 
         try {
@@ -49,7 +83,7 @@ public class Database extends Config {
 
     public boolean isPlayerInDatabase(String nickname) {
         ResultSet resultSet;
-        String request = "SELECT nickname FROM players WHERE nickname = ?";
+        String request = "SELECT nickname FROM " + tableName + " WHERE nickname = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);
@@ -66,7 +100,7 @@ public class Database extends Config {
     }
 
     public void addGameActivity(String nickname, Double value) {
-        String request = "UPDATE players SET game_activity = game_activity + ? WHERE nickname = ?";
+        String request = "UPDATE " + tableName + " SET game_activity = game_activity + ? WHERE nickname = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);
@@ -79,7 +113,7 @@ public class Database extends Config {
     }
 
     public void addChatActivity(String nickname) {
-        String request = "UPDATE players SET chat_activity = chat_activity + 1 WHERE nickname = ?";
+        String request = "UPDATE " + tableName + " SET chat_activity = chat_activity + 1 WHERE nickname = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);
@@ -90,22 +124,9 @@ public class Database extends Config {
         }
     }
 
-    public void addDiscordNickname(String nickname, String ds) {
-        String request = "UPDATE players SET ds_nickname = ? WHERE nickname = ?";
-
-        try {
-            PreparedStatement preparedStatement = getConnection().prepareStatement(request);
-            preparedStatement.setString(1, ds);
-            preparedStatement.setString(2, nickname);
-            preparedStatement.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public int getGameActivity(String nickname) {
         ResultSet resultSet;
-        String request = "SELECT game_activity FROM players WHERE nickname = ?";
+        String request = "SELECT game_activity FROM " + tableName + " WHERE nickname = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);
@@ -123,7 +144,7 @@ public class Database extends Config {
 
     public int chatActivity(String nickname) {
         ResultSet resultSet;
-        String request = "SELECT chat_activity FROM players WHERE nickname = ?";
+        String request = "SELECT chat_activity FROM " + tableName + " WHERE nickname = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(request);

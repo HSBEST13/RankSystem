@@ -1,6 +1,6 @@
-package xyz.hsbestudio.mineice;
+package xyz.hsbestudio.ranksystem;
 
-import xyz.hsbestudio.mineice.db.Database;
+import xyz.hsbestudio.ranksystem.db.Database;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

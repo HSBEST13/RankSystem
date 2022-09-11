@@ -1,10 +1,10 @@
 tableName: "players"
 chatActivityRatio: 0.5
 gameActivityRatio: 0.5
-
+hasDb: true
 db:
   host: "localhost"
-  port: "3306"
-  dbName: "mine-ice"
-  login: "root"
-  password: "pswd"
+  port: "3307"
+  dbName: "rank-system"
+  login: "rankSystemPlugin"
+  password: "12345678"

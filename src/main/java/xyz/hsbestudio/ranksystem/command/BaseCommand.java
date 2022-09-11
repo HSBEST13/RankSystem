@@ -1,6 +1,6 @@
-package xyz.hsbestudio.mineice.command;
+package xyz.hsbestudio.ranksystem.command;
 
-import xyz.hsbestudio.mineice.MineIceRank;
+import xyz.hsbestudio.ranksystem.RankSystem;
 import org.bukkit.command.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public abstract class BaseCommand implements CommandExecutor, TabCompleter {
     public BaseCommand(String command) {
-        PluginCommand pluginCommand = MineIceRank.getInstance().getCommand(command);
+        PluginCommand pluginCommand = RankSystem.getInstance().getCommand(command);
         if (pluginCommand != null) {
             pluginCommand.setExecutor(this);
             pluginCommand.setTabCompleter(this);

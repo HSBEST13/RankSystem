@@ -1,16 +1,16 @@
-package xyz.hsbestudio.mineice;
+package xyz.hsbestudio.ranksystem;
 
-import xyz.hsbestudio.mineice.command.DiscordCommand;
-import xyz.hsbestudio.mineice.command.RankCommand;
-import xyz.hsbestudio.mineice.db.Database;
+import xyz.hsbestudio.ranksystem.command.DiscordCommand;
+import xyz.hsbestudio.ranksystem.command.RankCommand;
+import xyz.hsbestudio.ranksystem.db.Database;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Logger;
 
-public final class MineIceRank extends JavaPlugin {
-    private static final Logger LOGGER = Logger.getLogger("MineIceRank");
-    private static MineIceRank instance;
+public final class RankSystem extends JavaPlugin {
+    private static final Logger LOGGER = Logger.getLogger("RankSystem");
+    private static RankSystem instance;
 
     private void onRegisterCommands() {
         new RankCommand();
@@ -24,7 +24,7 @@ public final class MineIceRank extends JavaPlugin {
         saveDefaultConfig();
 
         Database database = new Database();
-        String tableName = MineIceRank.getInstance().getConfig().getString("tableName");
+        String tableName = RankSystem.getInstance().getConfig().getString("tableName");
 
         try {
             database.createTable(tableName);
@@ -43,7 +43,7 @@ public final class MineIceRank extends JavaPlugin {
         LOGGER.info("MineIce Discord Plugin disabled!");
     }
 
-    public static MineIceRank getInstance() {
+    public static RankSystem getInstance() {
         return instance;
     }
 }

@@ -1,6 +1,6 @@
-name: MineIceRank
+name: RankSystem
 version: '${project.version}'
-main: xyz.hsbestudio.mineice.MineIceRank
+main: xyz.hsbestudio.ranksystem.RankSystem
 api-version: 1.19
 authors: [ SilentType ]
 commands:
