@@ -30,10 +30,9 @@ public class RankCommand extends BaseCommand {
 
         if (args.length == 0) {
             double activity = Math.log(database.chatActivity(sender.getName()) * chatActivityRatio +
-                    database.getGameActivity(sender.getName()) * gameActivityRatio) / Math.log(5);
-
+                    database.getGameActivity(sender.getName()) * gameActivityRatio) / Math.log(2);
             sender.sendMessage(ChatColor.DARK_GREEN + "Now your rank is: " +
-                    ChatColor.DARK_PURPLE + (activity <= 12 ? Math.round(activity) : 12));
+                    ChatColor.DARK_PURPLE + (int)Math.floor(activity));
             return;
         }
 

@@ -1,5 +1,6 @@
 package xyz.hsbestudio.ranksystem;
 
+import org.bukkit.attribute.Attribute;
 import xyz.hsbestudio.ranksystem.db.Database;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class EventListener implements Listener {
     private final Database database = new Database();
@@ -24,10 +26,14 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        UUID uuid = event.getPlayer().getUniqueId();
         String nickname = getNickname(event);
 
         if (!database.isPlayerInDatabase(nickname))
-            database.createPlayer(nickname);
+            database.createPlayer(nickname, event.getPlayer().getUniqueId());
+        if(!database.isRegistered(uuid)) {
+            RankSystem.getInstance().discordAnnoyer.annoyPlayer(event.getPlayer());
+        }
     }
 
     @EventHandler
@@ -61,11 +67,11 @@ public class EventListener implements Listener {
 
         if (lastKillEntityTine.containsKey(nickname)) {
             if ((nowTime - lastKillEntityTine.get(nickname)) / 1000 >= 10) {
-                database.addGameActivity(nickname, event.getEntity().getMaxHealth());
+                database.addGameActivity(nickname, event.getEntity().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                 lastKillEntityTine.put(nickname, nowTime);
             }
         } else {
-            database.addGameActivity(nickname, event.getEntity().getMaxHealth());
+            database.addGameActivity(nickname, event.getEntity().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             lastKillEntityTine.put(nickname, nowTime);
         }
     }

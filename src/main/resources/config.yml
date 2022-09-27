@@ -1,10 +1,18 @@
 tableName: "players"
 chatActivityRatio: 0.5
 gameActivityRatio: 0.5
-hasDb: true
 db:
   host: "localhost"
   port: "3307"
   dbName: "rank-system"
   login: "rankSystemPlugin"
   password: "12345678"
+
+discordAnnoyMessage:
+- |-
+  Вы не привязали дискорд
+  Если вы привяжете дискорд то мы сможем выдать вам ранг на нашем дискорд сервере
+discordLinkMessage:
+  - |-
+    Для привязки дискорда, [скопируйте] id и напишие нашему боту /minecraft <ваш-id>
+    Бот находится на нашем дискорд сервере https://discord.gg/sKgypSe7gW
