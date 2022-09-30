@@ -14,7 +14,13 @@ Hello here
 - Create [mysql](https://www.mysql.com) database
 ## Commands
  
->__Discord__ <br> Command to work with [discord bot]()<br>
+>__Discord__ <br> Command to work with [discord bot](https://github.com/dgudim/Discord-minerank-bot)<br>
 >__Rank__ <br> Command to show player's rank
 
 ## Config
+- __tableName__: Name of the database table 
+- __chatActivityRatio__ and __gameActivityRatio__ it is cofficients for ranks
+- __db__ it is database settings
+- __discordAnnoyMessage__ this message for annoy people for adding discord account
+- __discordLinkMessage__ this message for copy link to add discord account
+- For using last to parameters you will use with [discord bot](https://github.com/dgudim/Discord-minerank-bot)
