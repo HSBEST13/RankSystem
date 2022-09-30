@@ -10,9 +10,9 @@ db:
 
 discordAnnoyMessage:
 - |-
-  Вы не привязали дискорд
-  Если вы привяжете дискорд то мы сможем выдать вам ранг на нашем дискорд сервере
+You haven't linked a discord
+If you link a discord, we will be able to give you a rank on our discord server
 discordLinkMessage:
   - |-
-    Для привязки дискорда, [скопируйте] id и напишие нашему боту /minecraft <ваш-id>
-    Бот находится на нашем дискорд сервере https://discord.gg/sKgypSe7gW
+    To bind the discord, [copy] the id and write to our bot /minecraft <your-id>
+    The bot is located on our discord server https://discord .gg/sKgypSe7gW
