@@ -1,4 +1,5 @@
 # RankSystem
+![](logo.png)
 
 Hello here
 ### This is paper plugin for ranks
