@@ -53,3 +53,4 @@ discordLinkMessage:
 
 ![](https://img.shields.io/badge/Minecraft-62B47A.svg?style=for-the-badge&logo=Minecraft&logoColor=white)
 ![](https://img.shields.io/badge/CurseForge-6441A4.svg?style=for-the-badge&logo=CurseForge&logoColor=white)
+![](https://img.shields.io/badge/MySQL-4479A1.svg?style=for-the-badge&logo=MySQL&logoColor=white)
