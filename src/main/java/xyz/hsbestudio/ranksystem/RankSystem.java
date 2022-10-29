@@ -47,7 +47,7 @@ public final class RankSystem extends JavaPlugin {
         onRegisterCommands();
 
         Bukkit.getPluginManager().registerEvents(new EventListener(), this);
-        LOGGER.info("MineIce Discord Plugin is working!");
+        LOGGER.info("RankSystem plugin is working!");
     }
 
     @Override
@@ -59,7 +59,7 @@ public final class RankSystem extends JavaPlugin {
                 throw new RuntimeException(e);
             }
         }
-        LOGGER.info("MineIce Discord Plugin disabled!");
+        LOGGER.info("RankSystem plugin is disabled!");
     }
 
     public static RankSystem getInstance() {
