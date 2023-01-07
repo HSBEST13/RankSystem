@@ -24,7 +24,7 @@ Hello here
 - __db__ it is database settings
 - __discordAnnoyMessage__ this message for annoy people for adding discord account
 - __discordLinkMessage__ this message for copy link to add discord account
-- For using last to parameters you will use with [discord bot](https://github.com/dgudim/Discord-minerank-bot)<br>
+- For using last two parameters you will use with [discord bot](https://github.com/dgudim/Discord-minerank-bot)<br>
 
 ### Defalut
 `config.yml`
