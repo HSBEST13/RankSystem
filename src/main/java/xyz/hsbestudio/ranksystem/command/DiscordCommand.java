@@ -36,7 +36,6 @@ public class DiscordCommand extends BaseCommand {
             var nickname = player.getName();
             UUID uuid = player.getUniqueId();
             if (database.isRegistered(uuid)) {
-                //FIXME: add message with choose
                 sender.sendMessage("Вы уже зарегистрированы в дискорде!");
                 return;
             }
@@ -46,8 +45,6 @@ public class DiscordCommand extends BaseCommand {
             int first = msg.indexOf('[');
             int last = msg.indexOf(']') + 1;
             var button = msg.substring(first, last);
-            //button.replace('<', '[');
-            //button.replace('>', ']');
 
             var array = new String[]{msg.substring(0, first), msg.substring(last)};
 
@@ -62,27 +59,6 @@ public class DiscordCommand extends BaseCommand {
                     .build());
         }
     }
-
-//    @Override
-//    public void execute(CommandSender sender, String label, String[] args) {
-//        if (Objects.equals(sender.getName(), "CONSOLE")) {
-//            sender.sendMessage(ChatColor.DARK_RED + "Server could not use this command");
-//            return;
-//        }
-//
-//        if (args.length == 0) {
-//            int id = database.getDiscordId(sender.getName());
-//
-//            sender.sendMessage(ChatColor.DARK_GREEN + "Your discord id is " +
-//                    ChatColor.DARK_BLUE + id +
-//                    ChatColor.DARK_GREEN + ". Please enter this id in discord bot");
-//            return;
-//        }
-//
-//        sender.sendMessage(ChatColor.DARK_RED + "No such command was found.\nYou can use " +
-//                ChatColor.DARK_BLUE + "/discord " +
-//                ChatColor.DARK_RED + " to get your discord id for bot");
-//    }
 
     @Override
     public List<String> complete(CommandSender sender, String[] args) {
